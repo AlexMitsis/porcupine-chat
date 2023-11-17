@@ -19,18 +19,6 @@ const SendMessage = ({scroll}) => {
     }
     const CryptoJS = require('crypto-js');
     var encryptedString = CryptoJS.AES.encrypt(input, key).toString();
-    // var encryptedString = encrypted.toString(CryptoJS.enc.Utf8);
-
-    // console.log(encryptedString)
-    // var encryptedTest = JSON.stringify(encrypted)
-    // console.log(encryptedTest)
-    // console.log(encryptedString)
-    // var decrypted = CryptoJS.AES.decrypt(encryptedString, key);
-    // var decryptedString = decrypted.toString(CryptoJS.enc.Utf8);
-    // console.log(decryptedString)
-    // console.log(encrypted)
-    // var decrypted = CryptoJS.AES.decrypt(encrypted, key).toString(CryptoJS.enc.Utf8);
-    // var decrypted = CryptoJS.AES.decrypt(encrypted, "assfawfavasgvegq").toString();
     const {uid, displayName} = auth.currentUser
     await addDoc(collection(db, 'messages'), {
         text: encryptedString,
