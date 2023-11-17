@@ -1,3 +1,5 @@
+Chatting Application featuring end-to-end encryption. Frontend was developed with JS and React. Styling was done with Tailwind. Backend was setup with google firebase. 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
