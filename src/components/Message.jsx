@@ -19,8 +19,6 @@ const Message = ({ message }) => {
   
   
   var decryptedValue = CryptoJS.AES.decrypt(message.text.toString(CryptoJS.enc.Base64), key, { padding: CryptoJS.pad.Pkcs7 });
-  // var decryptedString = decryptedValue.toString(CryptoJS.enc.Utf8);
-  // var decryptedString = decryptedValue.toString(CryptoJS.enc.Utf8);
   var decryptedString = decryptedValue.toString(CryptoJS.enc.Utf8);
 
   return (
