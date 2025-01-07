@@ -76,3 +76,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 - Enhance the chat room creation functionality to support multi-user environments and generate customizable invite links.
 - Transition the backend services from Firebase to Supabase for improved performance and scalability.
+- Host a demo app on Vercel.
