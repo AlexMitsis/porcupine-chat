@@ -70,3 +70,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Future enhancements:
+
+- Enhance the chat room creation functionality to support multi-user environments and generate customizable invite links.
+- Transition the backend services from Firebase to Supabase for improved performance and scalability.
