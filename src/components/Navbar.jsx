@@ -1,20 +1,64 @@
-import React from "react";
-import { auth } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useState, useEffect } from "react";
+import { supabase } from "../supabase";
 import SignIn from "./SignIn";
 import LogOut from "./LogOut";
-const style = {
-  nav: `bg-gray-800 h-20 flex justify-between items-center p-4`,
-  heading: `text-white text-3xl`
-}
+
 function Navbar() {
-  const [user] = useAuthState(auth);
-  console.log(user);
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
-    <div className={style.nav}>
-      <h1 className={style.heading}>Chat App</h1>
-      {/* if user true display LogOut component, otherwise SignIn component */ }
-      {user ? <LogOut /> : <SignIn />}
+    <div className="bg-white shadow-md border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">🔐</span>
+            </div>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Porcupine <span className="text-gray-400 font-normal">v2</span>
+            </h1>
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            {user && (
+              <div className="hidden sm:flex items-center space-x-3 text-sm text-gray-600">
+                <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                  {user.user_metadata?.avatar_url ? (
+                    <img 
+                      src={user.user_metadata.avatar_url} 
+                      alt="Avatar" 
+                      className="w-8 h-8 rounded-full"
+                    />
+                  ) : (
+                    <span className="text-gray-600 font-medium">
+                      {(user.user_metadata?.full_name || user.email || 'U').charAt(0).toUpperCase()}
+                    </span>
+                  )}
+                </div>
+                <span className="font-medium">
+                  {user.user_metadata?.full_name || user.email}
+                </span>
+              </div>
+            )}
+            {user ? <LogOut /> : <SignIn />}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
