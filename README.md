@@ -2,6 +2,7 @@
 
 A modern, secure chat application featuring **end-to-end encryption**, **room-based conversations**, and **universal dark mode**. Built with React, Supabase, and modern cryptography.
 
+![porcupine-logo](porcupine.png)
 ## ✨ Features
 
 ### 🔒 **Security & Privacy**
