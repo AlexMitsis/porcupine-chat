@@ -10,6 +10,7 @@
 
 # production
 /build
+build/
 
 # misc
 .DS_Store
@@ -18,6 +19,74 @@
 .env.test.local
 .env.production.local
 
+# environment files
+.env
+
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Claude Code artifacts
+.claude/
+
+# Django/Python backend
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+.pytest_cache/
+
+# Backend specific
+backend/venv/
+backend/env/
+backend/__pycache__/
+backend/logs/
+backend/*.log
+backend/db.sqlite3
+backend/media/
+backend/static/
+backend/.env
+backend/.env.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+*.tmp
+
+# Additional common files
+*.lock
+.DS_Store?
+ehthumbs.db
+Icon?
+
+# Cache directories
+.cache/
+.npm/
+.eslintcache
+
+# Docker
+docker-compose.override.yml
+.docker/
+
+# Temporary files
+*.temp
+*.tmp
+*~
+
+# Large files that might cause timeouts
+*.zip
+*.tar.gz
+*.rar
+*.7z

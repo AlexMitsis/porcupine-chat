@@ -28,7 +28,7 @@ const SignIn = () => {
 
   return (
     <button
-      className={`inline-flex items-center space-x-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all ${
+      className={`inline-flex items-center space-x-2 px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 transition-all shadow-md hover:shadow-lg ${
         loading ? 'opacity-75 cursor-not-allowed' : ''
       }`}
       onClick={googleSignIn}

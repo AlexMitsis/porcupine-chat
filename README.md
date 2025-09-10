@@ -1,79 +1,192 @@
-Chatting Application featuring end-to-end encryption. Frontend was developed with JS and React. Styling was done with Tailwind. Backend was setup with google firebase. 
+# 🔐 Porcupine Chat - Secure Room-Based Messaging
 
-# Getting Started with Create React App
+A modern, secure chat application featuring **end-to-end encryption**, **room-based conversations**, and **universal dark mode**. Built with React, Supabase, and modern cryptography.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ✨ Features
 
-## Available Scripts
+### 🔒 **Security & Privacy**
+- **End-to-end encryption** using ECDH key exchange and AES-256-GCM
+- **Personal encryption keys** - only you can decrypt your messages
+- **Secure room-based architecture** with unique keypairs per room
+- **Google OAuth authentication** via Supabase Auth
 
-In the project directory, you can run:
+### 🎨 **Modern UI/UX**
+- **Universal dark mode** with toggle (defaults to dark)
+- **Responsive design** that works on all devices
+- **Professional chat interface** with message bubbles and timestamps
+- **Smooth animations** (fade-in, slide-up, bounce-in effects)
+- **Real-time message updates** with loading indicators
 
-### `npm start`
+### 🏠 **Room Management**
+- **Create private rooms** with custom names and generated codes
+- **Join rooms via invite links** or room codes
+- **Multi-user encrypted group chats**
+- **Room member management** with creator privileges
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Quick Start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
+- Node.js 16+ and npm
+- Supabase account and project setup (instructions below)
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd porcupine-chat
+   ```
 
-### `npm run build`
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   # Add your Supabase credentials to .env
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-### `npm run eject`
+### Available Scripts
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **`npm start`** - Runs the development server (with deprecation warnings suppressed)
+- **`npm test`** - Launches the test runner in interactive watch mode
+- **`npm run build`** - Builds the app for production
+- **`npm run eject`** - Ejects from Create React App (one-way operation)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🏗️ Architecture
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Current Stack
+- **Frontend:** React 18 + Tailwind CSS v3
+- **Backend:** Supabase (PostgreSQL + Real-time + Auth)
+- **Encryption:** Web Crypto API (ECDH + AES-256-GCM)
+- **State Management:** React Context API + useState/useEffect
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Key Components
+```
+src/
+├── components/
+│   ├── App.js                 # Main app with theme provider
+│   ├── Navbar.jsx            # Navigation with dark mode toggle
+│   ├── SignIn.jsx            # Google OAuth authentication
+│   ├── RoomSelection.jsx     # Room list and creation interface
+│   ├── RoomChat.jsx          # Chat interface with E2E encryption
+│   ├── DarkModeToggle.jsx    # Animated theme toggle
+│   └── ErrorBoundary.jsx     # Error handling wrapper
+├── contexts/
+│   └── ThemeContext.js       # Dark mode state management
+├── utils/
+│   └── crypto.js            # Encryption utilities
+└── supabase.js              # Supabase client configuration
+```
 
-## Learn More
+## 🔑 How It Works
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Encryption Flow
+1. **Room Creation/Join**: Each user generates an ECDH keypair for the room
+2. **Key Exchange**: Public keys are stored in the database, private keys stay local
+3. **Shared Secrets**: Users derive shared secrets with other room members
+4. **Message Encryption**: Messages are encrypted with AES-256-GCM using shared secrets
+5. **Real-time Delivery**: Encrypted messages are sent via Supabase real-time
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Dark Mode System
+- **Theme Context**: Global state management for dark/light mode
+- **LocalStorage Persistence**: User preference saved across sessions
+- **Default Dark**: New users start with dark mode enabled
+- **Universal Application**: All components support both themes
 
-### Code Splitting
+## 📋 Development Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 🚧 In Progress
+- [ ] Django backend migration
+- [ ] Enhanced secure connection debugging and auto-recovery
+- [ ] Improved error handling for edge cases
 
-### Analyzing the Bundle Size
+### 📋 Upcoming Features
+- [ ] Message search and filtering
+- [ ] File sharing with encryption
+- [ ] Voice/video calling integration
+- [ ] Mobile app development (React Native)
+- [ ] Advanced room management (admin controls, member permissions)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 🔄 Django Migration Plan (Future)
+The project includes comprehensive preparation for migrating from Supabase to Django:
 
-### Making a Progressive Web App
+**Phase 1: Parallel Systems**
+- Docker Compose setup with Django + PostgreSQL + Redis
+- API compatibility testing and documentation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Phase 2: Data Migration**
+- Export/import scripts for rooms, users, and messages
+- Data integrity validation and rollback procedures
 
-### Advanced Configuration
+**Phase 3: Frontend API Switch**
+- Django JWT authentication replacement
+- WebSocket real-time messaging migration
+- Encryption handling updates
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Phase 4: Cleanup**
+- Supabase dependency removal
+- Documentation updates and deployment script changes
 
-### Deployment
+## 🎨 Design System
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Color Palette
+- **Dark Theme**: Custom scale from `dark-50` to `dark-950`
+- **Accent Colors**: Blue to purple gradients
+- **Success/Error States**: Green and red variants with dark mode support
 
-### `npm run build` fails to minify
+### Typography & Spacing
+- **Font**: System font stack with fallbacks
+- **Spacing**: Tailwind's 4px-based scale
+- **Shadows**: Layered shadows with dark mode variants
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Animations
+- **Duration**: 200ms for micro-interactions, 300ms for page transitions
+- **Easing**: `ease-in-out` for natural movement
+- **Types**: fade-in, slide-up, bounce-in effects
 
+### Troubleshooting
 
-### Future enhancements:
+**"Unable to establish secure connection"**
+- Clear localStorage and refresh the page
+- Check browser console for detailed error messages
+- Ensure Supabase connection is stable
 
-- Enhance the chat room creation functionality to support multi-user environments and generate customizable invite links.
-- Transition the backend services from Firebase to Supabase for improved performance and scalability.
-- Host a demo app on Vercel.
+**Messages not appearing**
+- Verify room membership in database
+- Check if encryption keys are properly generated
+- Refresh page to re-establish real-time connection
+
+**Dark mode not persisting**
+- Check localStorage for `theme` key
+- Ensure ThemeProvider wraps the entire app
+- Clear browser cache if needed
+
+## 🔧 Configuration
+
+### Environment Variables
+```bash
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+REACT_APP_ENV=development
+```
+
+### Supabase Setup
+Required tables and configurations are documented in:
+- `setup-database.sql` - Initial schema
+- `enable-realtime.sql` - Real-time subscriptions
+- `room-based-schema.sql` - Room and member tables
+
+## 📜 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
